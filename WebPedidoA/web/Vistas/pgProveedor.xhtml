@@ -1,0 +1,184 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Sistema Analisis</title>
+        <script type="text/javascript" src="funciones.js"></script>
+        <link rel="stylesheet" href="estilos.css"/> 
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    </h:head>
+    <h:body onload="foco('form:nombre');">
+
+        <header fragment="header">
+
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container-fluid">
+
+                    <div class="collapse navbar-collapse px-2" id="navbarCollapse">
+
+                        <ul class="navbar-nav">
+                            <li class="nav-item px-2">
+                                <a href="../index.xhtml" class="nav-link active" text="">Inicio</a>
+                            </li>
+                        </ul>
+
+                        <ul class="navbar-nav">
+                            <li class="nav-item px-2">
+                                <a href="./pgCliente.xhtml" class="nav-link active" text="">Clientes</a>
+                            </li>
+                        </ul>
+
+                        <ul class="navbar-nav">
+                            <li class="nav-item px-2">
+                                <a href="./pgPedido.xhtml" class="nav-link active" text="">Pedidos</a>
+                            </li>
+                        </ul>
+
+                        <ul class="navbar-nav">
+                            <li class="nav-item px-2">
+                                <a href="./pgProducto.xhtml" class="nav-link active" text="">Productos</a>
+                            </li>
+                        </ul>
+
+                        <ul class="navbar-nav">
+                            <li class="nav-item px-2">
+                                <a href="./pgCategoria.xhtml" class="nav-link active" text="">Categorias</a>
+                            </li>
+                        </ul>
+
+                        <ul class="navbar-nav">
+                            <li class="nav-item px-2">
+                                <a href="./pgProveedor.xhtml" class="nav-link active" text="">Proveedores</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </nav>
+
+            <section id="main-header" class="py-2 text-white text-center bg-dark">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1>
+                                Proveedores
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </header>
+
+        <section id="actions" class="py-1 mb-2 bg-white">
+            <div class="container">
+                <div class="row">
+
+                </div>
+            </div>
+        </section>
+
+        <!--Agregar proveedores--> 
+
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="card">
+                    <div class="card-header bg-info">
+                        <h3>Agregar</h3>
+                    </div>
+
+                    <div class="card-body">
+
+                        <h:form id="form">
+                            <p:growl id="growl" life="2000" showDetail="true" />
+                            <div class="form-group">
+                                <h5>Nombre Proveedor</h5>
+                                <p:inputText class="text-Inputs"  id="nombre" value="#{beanProveedor.nombre}" onkeypress="if (event.keyCode === 13) {
+                                                    foco('form:direccion');
+                                                    return false;
+                                                }"/> 
+                            </div>
+
+                            <div class="form-group">
+                                <h5>Direccion</h5>
+                                <p:inputText class="text-Inputs"  id="direccion" value="#{beanProveedor.direccion}" onkeypress="if (event.keyCode === 13) {
+                                                    foco('form:telefono');
+                                                    return false;
+                                                }"/> 
+                            </div>
+
+
+                            <div class="form-group">
+                                <h5>Telefono</h5>
+                                <p:inputText class="text-Inputs"  id="telefono" value="#{beanProveedor.telefono}" onkeypress="if (event.keyCode === 13) {
+                                                    focoBoton('form:guardar', 'form:btnModificar');
+                                                    return false;
+                                                }"   />
+                                <br></br>
+                                <br></br>
+                            </div>
+
+                            <div class="modal-footer">
+                                <p:commandButton class="btn btn-outline-primary btn-lg row h-50 w-30" value="Guardar" id="guardar" update="growl,@form,tabla" action="#{beanProveedor.insertar()}" style="margin-right:20px;display:block" />
+
+                                <p:commandButton class="btn btn-outline-success btn-lg row h-50 w-30" value="Modificar" id="btnModificar" update="growl,@form,tabla" action="#{beanProveedor.modificar()}" style="margin-right:20px;display:none" />
+                            </div>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--Listado de categorias-->
+
+            <div class="col-sm-9">
+                <div class="card">
+                    <div class="card-header bg-info">
+                        <h3>Listado de Proveedores</h3>
+                    </div>
+
+                    <h:form id="tabla">
+                        <p:dataTable var="proveedor" value="#{beanProveedor.listaProveedor}" rows="5" paginator="true" rowsPerPageTemplate="5,10,15">
+
+                            <p:column class="border-info text-dark" headerText="Nombre" sortBy="#{proveedor.nombre}" filterBy="#{proveedor.nombre}">
+                                <h:outputText value="#{proveedor.nombre}" />
+                            </p:column>
+
+                            <p:column class="border-info text-dark" headerText="Direccion" sortBy="#{proveedor.direccion}"   filterBy="#{proveedor.direccion}">
+                                <h:outputText value="#{proveedor.direccion}" />
+                            </p:column>
+
+                            <p:column class="border-info text-dark" headerText="Telefono" sortBy="#{proveedor.telefono}"   filterBy="#{proveedor.telefono}">
+                                <h:outputText value="#{proveedor.telefono}" />
+                            </p:column>
+
+                            <p:column  class="border-info text-dark" headerText="Modificar" >
+                                <p:commandButton class="btn btn-success" value="Modificar " id="modificar" update="form:nombre,form:direccion,form:telefono" action="#{beanProveedor.enviarDatos(proveedor)}" onclick="ocultarGuardar('form:guardar', 'form:btnModificar');" style="margin-right:20px;" />
+                            </p:column>
+                            <p:column  class="border-info text-dark" headerText="Anular" >
+                                <p:commandButton class="btn btn-danger" value="Anular " id="anular" update="form" action="#{beanProveedor.enviarDatosAnular(proveedor)}" onclick="PF('dialogoAnular').show();" style="margin-right:20px;" />
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>             
+                </div>
+            </div>
+        </div>
+
+
+        <p:dialog header="Anular" widgetVar="dialogoAnular" modal="true" showEffect="explode" hideEffect="bounce" height="100">
+            <h:form>
+                <h:outputText value="¿Desea Anular el Proveedor?" />
+                <br></br>
+                <br></br>
+                <p:commandButton class="btn btn-danger"  value=" Si " id="si" update=":form:growl,tabla" action="#{beanProveedor.anular()}" onclick="PF('dialogoAnular').hide();" style="margin-right:20px;" />
+                <p:commandButton class="btn btn-success" value=" No " id="no" onclick="PF('dialogoAnular').hide();" style="margin-right:20px;" />
+            </h:form>
+        </p:dialog>
+
+    </h:body>
+</html>
+

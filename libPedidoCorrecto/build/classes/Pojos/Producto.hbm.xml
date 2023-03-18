@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 1/11/2021 08:47:39 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Pojos.Producto" table="producto" catalog="pedidoa" optimistic-lock="version">
+        <id name="codigoProducto" type="java.lang.Integer">
+            <column name="CODIGO_PRODUCTO" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="categoria" class="Pojos.Categoria" fetch="select">
+            <column name="COD_CATEGORIA" not-null="true" />
+        </many-to-one>
+        <many-to-one name="proveedor" class="Pojos.Proveedor" fetch="select">
+            <column name="COD_PROVEEDOR" not-null="true" />
+        </many-to-one>
+        <property name="estado" type="boolean">
+            <column name="ESTADO" not-null="true" />
+        </property>
+        <property name="nombreProducto" type="string">
+            <column name="NOMBRE_PRODUCTO" length="30" not-null="true" />
+        </property>
+        <property name="descripcionProducto" type="string">
+            <column name="DESCRIPCION_PRODUCTO" not-null="true" />
+        </property>
+        <property name="cantidadProducto" type="int">
+            <column name="CANTIDAD_PRODUCTO" not-null="true" />
+        </property>
+        <property name="precioProducto" type="big_decimal">
+            <column name="PRECIO_PRODUCTO" precision="10" not-null="true" />
+        </property>
+        <property name="usuarioIngreso" type="java.lang.Integer">
+            <column name="USUARIO_INGRESO" />
+        </property>
+        <property name="fechaIngreso" type="timestamp">
+            <column name="FECHA_INGRESO" length="19" />
+        </property>
+        <property name="usuarioModificacion" type="java.lang.Integer">
+            <column name="USUARIO_MODIFICACION" />
+        </property>
+        <property name="fechaModificacion" type="timestamp">
+            <column name="FECHA_MODIFICACION" length="19" />
+        </property>
+        <set name="pedidoDetalles" table="pedido_detalle" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CODIGO_PRODUCTO" not-null="true" />
+            </key>
+            <one-to-many class="Pojos.PedidoDetalle" />
+        </set>
+    </class>
+</hibernate-mapping>

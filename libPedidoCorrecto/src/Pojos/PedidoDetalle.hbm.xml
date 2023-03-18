@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 1/11/2021 08:47:39 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Pojos.PedidoDetalle" table="pedido_detalle" catalog="pedidoa" optimistic-lock="version">
+        <composite-id name="id" class="Pojos.PedidoDetalleId">
+            <key-property name="noFactura" type="int">
+                <column name="NO_FACTURA" />
+            </key-property>
+            <key-property name="codigoProducto" type="int">
+                <column name="CODIGO_PRODUCTO" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="pedido" class="Pojos.Pedido" update="false" insert="false" fetch="select">
+            <column name="NO_FACTURA" not-null="true" />
+        </many-to-one>
+        <many-to-one name="producto" class="Pojos.Producto" update="false" insert="false" fetch="select">
+            <column name="CODIGO_PRODUCTO" not-null="true" />
+        </many-to-one>
+        <property name="cantidad" type="java.lang.Integer">
+            <column name="CANTIDAD" />
+        </property>
+        <property name="precio" type="big_decimal">
+            <column name="PRECIO" precision="10" />
+        </property>
+    </class>
+</hibernate-mapping>

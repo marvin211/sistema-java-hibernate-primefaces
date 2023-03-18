@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 1/11/2021 08:47:39 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Pojos.Pedido" table="pedido" catalog="pedidoa" optimistic-lock="version">
+        <id name="noFactura" type="java.lang.Integer">
+            <column name="NO_FACTURA" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="cliente" class="Pojos.Cliente" fetch="select">
+            <column name="CODIGO_CLIENTE" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuario" class="Pojos.Usuario" fetch="select">
+            <column name="USUARIO_INGRESO" />
+        </many-to-one>
+        <property name="estado" type="boolean">
+            <column name="ESTADO" not-null="true" />
+        </property>
+        <property name="fecha" type="date">
+            <column name="FECHA" length="10" />
+        </property>
+        <property name="fechaIngreso" type="timestamp">
+            <column name="FECHA_INGRESO" length="19" />
+        </property>
+        <property name="usuarioModificacion" type="java.lang.Integer">
+            <column name="USUARIO_MODIFICACION" />
+        </property>
+        <property name="fechaModificacion" type="timestamp">
+            <column name="FECHA_MODIFICACION" length="19" />
+        </property>
+        <set name="pedidoDetalles" table="pedido_detalle" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="NO_FACTURA" not-null="true" />
+            </key>
+            <one-to-many class="Pojos.PedidoDetalle" />
+        </set>
+    </class>
+</hibernate-mapping>

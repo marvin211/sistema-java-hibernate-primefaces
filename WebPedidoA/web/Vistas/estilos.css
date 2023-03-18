@@ -1,0 +1,74 @@
+
+ 
+ .input-container{
+     width: 525px;
+     border-radius: 10px;
+     margin-left: 70px;     
+ }
+ 
+  .input-containerD{
+     width: 525px;
+     border-radius: 10px;
+     margin-left: 42px;    
+ }
+ 
+ .input-selectC{  
+     border-radius: 2px;
+     margin-left: 25px;
+ }
+ 
+  .input-selectP{
+     border-radius: 2px;
+     margin-left: 20px;
+ }
+
+ .input-containerC{
+      width: 525px;
+     border-radius: 10px;
+     margin-left: 63px;     
+ }
+ 
+ .input-containerPP{
+     width: 525px;
+     border-radius: 10px;
+     margin-left: 83px;
+       
+ }
+ 
+ .btn-Guardar-Modificar{
+     margin-left: 400px;
+ }
+ 
+ .text-Inputs{
+    width: 280px;
+    border-radius: 10px;
+ }
+ 
+ .panelGrid{
+    color: blue; 
+ }
+ 
+ .tab-view{
+     background-color: aqua;
+     
+ }
+ 
+ .input-precio{
+     width: 300px;
+     border-radius: 10px;
+     margin-left: 65px;
+ }
+ 
+ .input-cantidad{
+      width: 300px;
+     border-radius: 10px;
+     margin-left: 44px;
+ }
+ 
+ .input-total{
+      width: 300px;
+     border-radius: 10px;
+     margin-left: 153px;
+ }
+ 
+ 

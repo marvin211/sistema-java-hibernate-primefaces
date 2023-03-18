@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 1/11/2021 08:47:39 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Pojos.Categoria" table="categoria" catalog="pedidoa" optimistic-lock="version">
+        <id name="codigoCategoria" type="java.lang.Integer">
+            <column name="Codigo_Categoria" />
+            <generator class="identity" />
+        </id>
+        <property name="estado" type="boolean">
+            <column name="Estado" not-null="true" />
+        </property>
+        <property name="nombreCategoria" type="string">
+            <column name="Nombre_Categoria" length="50" />
+        </property>
+        <property name="descripcionCategoria" type="string">
+            <column name="Descripcion_categoria" not-null="true" />
+        </property>
+        <property name="usuarioIngreso" type="java.lang.Integer">
+            <column name="Usuario_Ingreso" />
+        </property>
+        <property name="fechaIngreso" type="timestamp">
+            <column name="Fecha_Ingreso" length="19" />
+        </property>
+        <property name="usuarioModificacion" type="java.lang.Integer">
+            <column name="Usuario_Modificacion" />
+        </property>
+        <property name="fechaModificacion" type="timestamp">
+            <column name="Fecha_Modificacion" length="19" />
+        </property>
+        <set name="productos" table="producto" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="COD_CATEGORIA" not-null="true" />
+            </key>
+            <one-to-many class="Pojos.Producto" />
+        </set>
+    </class>
+</hibernate-mapping>

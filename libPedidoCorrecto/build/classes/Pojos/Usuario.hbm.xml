@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 1/11/2021 08:47:39 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Pojos.Usuario" table="usuario" catalog="pedidoa" optimistic-lock="version">
+        <id name="codigoUsuario" type="java.lang.Integer">
+            <column name="CODIGO_USUARIO" />
+            <generator class="identity" />
+        </id>
+        <property name="estado" type="boolean">
+            <column name="ESTADO" not-null="true" />
+        </property>
+        <property name="usuario" type="string">
+            <column name="USUARIO" length="30" not-null="true" />
+        </property>
+        <property name="contrasenia" type="string">
+            <column name="CONTRASENIA" length="80" not-null="true" />
+        </property>
+        <property name="usuarioIngreso" type="java.lang.Integer">
+            <column name="USUARIO_INGRESO" />
+        </property>
+        <property name="fechaIngreso" type="timestamp">
+            <column name="FECHA_INGRESO" length="19" />
+        </property>
+        <property name="usuarioModificacion" type="java.lang.Integer">
+            <column name="USUARIO_MODIFICACION" />
+        </property>
+        <property name="fechaModificacion" type="timestamp">
+            <column name="FECHA_MODIFICACION" length="19" />
+        </property>
+        <set name="pedidos" table="pedido" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="USUARIO_INGRESO" />
+            </key>
+            <one-to-many class="Pojos.Pedido" />
+        </set>
+    </class>
+</hibernate-mapping>
